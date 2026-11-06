@@ -1,6 +1,5 @@
 package core.basesyntax;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -11,16 +10,16 @@ public final class Car {
     private final List<Wheel> wheels;
     private final Engine engine;
 
-    //implement this class
     public Car(int year, String color, List<Wheel> wheels, Engine engine) {
         this.year = year;
         this.color = color;
         int length = (wheels == null) ? 0 : wheels.size();
-        List<Wheel> wheelsCopy = new ArrayList<>(length);
-        if (wheels != null) {
-            for (Wheel wheel : wheels) {
-                wheelsCopy.add(wheel.clone());
-            }
+        List<Wheel> wheelsCopy = new ArrayList<Wheel>(length);
+        if (wheels == null) {
+            throw new NullPointerException();
+        }
+        for (Wheel wheel : wheels) {
+            wheelsCopy.add(wheel.clone());
         }
         this.wheels = wheelsCopy;
         this.engine = (engine == null) ? null : engine.clone();
@@ -47,16 +46,14 @@ public final class Car {
     public List<Wheel> getWheels() {
         int length = (wheels == null) ? 0 : wheels.size();
         List<Wheel> wheelsCopy = new ArrayList<>(length);
-        if (wheels != null) {
-            for (Wheel wheel : wheels) {
-                wheelsCopy.add(wheel.clone());
-            }
+        for (Wheel wheel : wheels) {
+            wheelsCopy.add(wheel.clone());
         }
         return wheelsCopy;
     }
 
     public Engine getEngine() {
-        return engine.clone();
+        return (engine == null) ? null : engine.clone();
     }
 
     public boolean equals(Object o) {
@@ -70,7 +67,7 @@ public final class Car {
                 && this.engine.equals(((Car) o).getEngine())) {
             return true;
         }
-        return true;
+        return false;
     }
 
     @Override
@@ -92,10 +89,8 @@ public final class Car {
     public Car addWheel(Wheel newWheel) {
         int length = (wheels == null) ? 1 : wheels.size() + 1;
         List<Wheel> newWheels = new ArrayList<>(length);
-        if (wheels != null) {
-            for (Wheel wheel : wheels) {
-                newWheels.add(wheel.clone());
-            }
+        for (Wheel wheel : wheels) {
+            newWheels.add(wheel.clone());
         }
         newWheels.add(newWheel);
         return new Car(this.year, this.color, newWheels, this.engine);

@@ -45,7 +45,7 @@ public class Engine implements Cloneable {
                 && Objects.equals(this.manufacturer, ((Engine) o).getManufacturer())) {
             return true;
         }
-        return true;
+        return false;
     }
 
     @Override
@@ -53,6 +53,7 @@ public class Engine implements Cloneable {
         return horsePower * 7 + manufacturer.hashCode();
     }
 
+    @Override
     public Engine clone() {
         return new Engine(horsePower, manufacturer);
     }

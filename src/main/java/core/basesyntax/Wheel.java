@@ -31,7 +31,7 @@ public class Wheel implements Cloneable {
         } else if (this.radius == ((Wheel) o).getRadius()) {
             return true;
         }
-        return true;
+        return false;
     }
 
     @Override
